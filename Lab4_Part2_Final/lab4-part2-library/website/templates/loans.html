@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}F2.4 Loans{% endblock %}
+{% block content %}
+<div class="heading"><span class="eyebrow">F2.4 · JOIN + LEFT JOIN</span><h1>Loan information</h1><p>Outstanding loans, members with no loans and books never borrowed.</p></div>
+<section class="panel"><div class="section-heading"><h2>(a) Not returned yet</h2><span class="count">{{ active|length }} loans</span></div><div class="table-scroll"><table><thead><tr><th>Loan ID</th><th>Book title</th><th>Member</th><th>Loan date</th><th>Status</th></tr></thead><tbody>
+{% for l in active %}<tr><td>{{ l.loan_id }}</td><td>{{ l.book }}</td><td>{{ l.member }}</td><td>{{ l.loan_date }}</td><td><span class="pill">Not returned</span></td></tr>{% else %}<tr><td colspan="5">All loans were returned.</td></tr>{% endfor %}
+</tbody></table></div></section>
+<div class="two-cols"><section class="panel"><h2>(b) Members with no loans</h2><div class="table-scroll"><table><thead><tr><th>Name</th><th>Email</th></tr></thead><tbody>{% for m in no_loans %}<tr><td>{{ m.name }}</td><td>{{ m.email }}</td></tr>{% else %}<tr><td colspan="2">Every member has borrowed something.</td></tr>{% endfor %}</tbody></table></div></section>
+<section class="panel"><h2>(c) Books never borrowed</h2><div class="table-scroll"><table><thead><tr><th>Book ID</th><th>Title</th></tr></thead><tbody>{% for b in never_borrowed %}<tr><td>{{ b.book_id }}</td><td>{{ b.title }}</td></tr>{% else %}<tr><td colspan="2">Every book has at least one loan.</td></tr>{% endfor %}</tbody></table></div></section></div>
+{% endblock %}

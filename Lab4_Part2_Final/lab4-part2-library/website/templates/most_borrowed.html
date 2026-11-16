@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block title %}F2.5 Most Borrowed{% endblock %}
+{% block content %}
+<div class="heading"><span class="eyebrow">F2.5 · GROUP BY + ORDER BY + LIMIT</span><h1>Most borrowed</h1><p>Three most borrowed books and the member with the most loans.</p></div>
+<section class="panel"><h2>(a) Top 3 books</h2><div class="table-scroll"><table><thead><tr><th>Rank</th><th>Title</th><th class="number">Number of loans</th></tr></thead><tbody>{% for b in books %}<tr><td>{{ loop.index }}</td><td><strong>{{ b.title }}</strong></td><td class="number">{{ b.loan_count }}</td></tr>{% else %}<tr><td colspan="3">No books yet.</td></tr>{% endfor %}</tbody></table></div></section>
+<section class="panel"><h2>(b) Member with the most loans</h2>{% if member %}<p class="winner">{{ member.name }} <span class="count">{{ member.loan_count }} loans</span></p>{% else %}<p class="empty">No members yet.</p>{% endif %}</section>
+{% endblock %}

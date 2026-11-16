@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Manage Library{% endblock %}
+{% block content %}
+<div class="heading"><span class="eyebrow">Lab 3 compatibility · Simple CRUD</span><h1>Manage books & authors</h1><p>Basic add, edit and delete actions. Deleting an author also removes their books and any related loans.</p></div>
+<section class="panel"><div class="section-heading"><h2>Books</h2><a class="button" href="{{ url_for('book_form') }}">+ Add book</a></div><div class="table-scroll"><table><thead><tr><th>ID</th><th>Title</th><th>Author</th><th class="number">Price</th><th>Actions</th></tr></thead><tbody>
+{% for b in books %}<tr><td>{{ b.book_id }}</td><td>{{ b.title }}</td><td>{{ b.author }}</td><td class="number">{{ b.price|money }}</td><td class="action-cell"><a href="{{ url_for('book_form', book_id=b.book_id) }}">Edit</a><form action="{{ url_for('delete_book', book_id=b.book_id) }}" method="post" onsubmit="return confirm('Delete this book and its loans?')"><button type="submit" class="link danger">Delete</button></form></td></tr>{% else %}<tr><td colspan="5">No books yet.</td></tr>{% endfor %}
+</tbody></table></div></section>
+<section class="panel"><div class="section-heading"><h2>Authors</h2><a class="button" href="{{ url_for('author_form') }}">+ Add author</a></div><div class="table-scroll"><table><thead><tr><th>ID</th><th>Name</th><th>Country</th><th>Actions</th></tr></thead><tbody>
+{% for a in authors %}<tr><td>{{ a.author_id }}</td><td>{{ a.name }}</td><td>{{ a.country }}</td><td class="action-cell"><a href="{{ url_for('author_form', author_id=a.author_id) }}">Edit</a><form action="{{ url_for('delete_author', author_id=a.author_id) }}" method="post" onsubmit="return confirm('Delete this author, all their books and loans?')"><button type="submit" class="link danger">Delete</button></form></td></tr>{% else %}<tr><td colspan="4">No authors yet.</td></tr>{% endfor %}
+</tbody></table></div></section>
+{% endblock %}

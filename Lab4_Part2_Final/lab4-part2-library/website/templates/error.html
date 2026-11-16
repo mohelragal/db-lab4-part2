@@ -1,0 +1,3 @@
+{% extends 'base.html' %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}<section class="panel narrow"><h1>{{ title }}</h1><p>{{ message }}</p><a class="button" href="{{ url_for('search_books') }}">Back to search</a></section>{% endblock %}

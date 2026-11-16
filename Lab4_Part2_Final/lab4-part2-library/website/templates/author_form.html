@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}{% if author_id %}Edit{% else %}Add{% endif %} Author{% endblock %}
+{% block content %}
+<div class="heading"><span class="eyebrow">Manage library</span><h1>{% if author_id %}Edit{% else %}Add{% endif %} author</h1></div>
+<section class="panel narrow"><form method="post" class="edit-form">
+<label>Name<input name="name" maxlength="100" value="{{ author.name if author else '' }}" required></label>
+<label>Country<input name="country" maxlength="50" value="{{ author.country if author else '' }}" required></label>
+<div class="actions"><button class="button" type="submit">Save author</button><a class="button secondary" href="{{ url_for('library') }}">Cancel</a></div>
+</form></section>
+{% endblock %}

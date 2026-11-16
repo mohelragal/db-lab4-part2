@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block title %}F2.6 Authors and Books{% endblock %}
+{% block content %}
+<div class="heading"><span class="eyebrow">F2.6 · LEFT JOIN + JOIN</span><h1>Authors & books</h1><p>Count the books for every author, including those with none; compare author and publisher countries.</p></div>
+<section class="panel"><h2>(a) All authors, including 0 books</h2><div class="table-scroll"><table><thead><tr><th>Author</th><th class="number">Books written</th></tr></thead><tbody>{% for a in authors %}<tr><td>{{ a.name }}</td><td class="number">{{ a.book_count }}</td></tr>{% else %}<tr><td colspan="2">No authors yet.</td></tr>{% endfor %}</tbody></table></div></section>
+<section class="panel"><h2>(b) Author and publisher from the same country</h2><div class="table-scroll"><table><thead><tr><th>Book title</th><th>Author</th><th>Publisher</th><th>Country</th></tr></thead><tbody>{% for b in same_country %}<tr><td>{{ b.title }}</td><td>{{ b.author }}</td><td>{{ b.publisher }}</td><td>{{ b.country }}</td></tr>{% else %}<tr><td colspan="4">No matches.</td></tr>{% endfor %}</tbody></table></div></section>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}{% if book_id %}Edit{% else %}Add{% endif %} Book{% endblock %}
+{% block content %}
+<div class="heading"><span class="eyebrow">Manage library</span><h1>{% if book_id %}Edit{% else %}Add{% endif %} book</h1></div>
+<section class="panel narrow"><form method="post" class="edit-form">
+<label>Title<input type="text" name="title" maxlength="200" value="{{ book.title if book else '' }}" required></label>
+<label>Price<input type="number" name="price" step="0.01" min="0" max="99999999" value="{{ book.price if book else '' }}" required></label>
+<label>Publication year<input type="number" name="publish_year" min="1" max="2100" value="{{ book.publish_year if book else '' }}" required></label>
+<label>Author<select name="author_id" required>{% for a in authors %}<option value="{{ a.author_id }}" {% if book and book.author_id|string == a.author_id|string %}selected{% endif %}>{{ a.name }}</option>{% endfor %}</select></label>
+<label>Publisher<select name="publisher_id" required>{% for p in publishers %}<option value="{{ p.publisher_id }}" {% if book and book.publisher_id|string == p.publisher_id|string %}selected{% endif %}>{{ p.name }}</option>{% endfor %}</select></label>
+<label>Category<select name="category_id" required>{% for c in categories %}<option value="{{ c.category_id }}" {% if book and book.category_id|string == c.category_id|string %}selected{% endif %}>{{ c.name }}</option>{% endfor %}</select></label>
+<div class="actions"><button class="button" type="submit">Save book</button><a class="button secondary" href="{{ url_for('library') }}">Cancel</a></div>
+</form></section>
+{% endblock %}

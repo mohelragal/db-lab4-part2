@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}F2.3 Reports{% endblock %}
+{% block content %}
+<div class="heading"><span class="eyebrow">F2.3 · GROUP BY + HAVING</span><h1>Library reports</h1><p>Book counts, average prices, prolific authors and price summary.</p></div>
+<div class="stats"><div class="stat"><span>Total price of books</span><strong>{{ totals.total_price|money }}</strong></div><div class="stat"><span>Lowest price</span><strong>{{ totals.minimum_price|money }}</strong></div><div class="stat"><span>Highest price</span><strong>{{ totals.maximum_price|money }}</strong></div></div>
+<section class="panel"><h2>(a) Books and average price per category</h2><div class="table-scroll"><table><thead><tr><th>Category</th><th class="number">Book count</th><th class="number">Average price</th></tr></thead><tbody>
+{% for c in categories %}<tr><td>{{ c.category }}</td><td class="number">{{ c.book_count }}</td><td class="number">{{ c.average_price|money }}</td></tr>{% else %}<tr><td colspan="3">No categories yet.</td></tr>{% endfor %}
+</tbody></table></div></section>
+<section class="panel"><h2>(b) Authors with at least 2 books</h2><div class="table-scroll"><table><thead><tr><th>Author</th><th class="number">Books written</th></tr></thead><tbody>
+{% for a in authors %}<tr><td>{{ a.author }}</td><td class="number">{{ a.book_count }}</td></tr>{% else %}<tr><td colspan="2">No authors match yet.</td></tr>{% endfor %}
+</tbody></table></div></section>
+<section class="panel"><h2>(c) Library price statistics</h2><p>SUM, MIN and MAX are shown at the top of this page.</p></section>
+{% endblock %}

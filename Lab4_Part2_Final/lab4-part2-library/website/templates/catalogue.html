@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %}F2.2 Catalogue{% endblock %}
+{% block content %}
+<div class="heading"><span class="eyebrow">F2.2 · JOIN</span><h1>Book catalogue</h1><p>All books with author, publisher and category names instead of IDs.</p></div>
+<section class="panel"><div class="section-heading"><h2>All books</h2><span class="count">{{ books|length }} books</span></div>
+{% if books %}<div class="table-scroll"><table><thead><tr><th>Title</th><th>Author</th><th>Publisher</th><th>Category</th><th>Year</th><th class="number">Price</th></tr></thead><tbody>
+{% for b in books %}<tr><td><strong>{{ b.title }}</strong></td><td>{{ b.author }}</td><td>{{ b.publisher }}</td><td>{{ b.category }}</td><td>{{ b.publish_year }}</td><td class="number">{{ b.price|money }}</td></tr>{% endfor %}
+</tbody></table></div>{% else %}<p class="empty">No books added yet.</p>{% endif %}</section>
+{% endblock %}
